@@ -14,12 +14,10 @@ public interface StudentRepository {
   List<Student> search();
 
   @Select("SELECT * FROM students_courses")
-  @Results({
-      @Result(property = "id", column = "id"),
-      @Result(property = "member_id", column = "member_id"),
+  @Results({@Result(property = "id", column = "id"),
+      @Result(property = "memberId", column = "memberId"),
       @Result(property = "course", column = "course"),
-      @Result(property = "course_startdate", column = "course_startdate"),
-      @Result(property = "course_enddate", column = "course_enddate")
-  })
+      @Result(property = "courseStartDate", column = "courseStartDate"),
+      @Result(property = "courseEndDate", column = "courseEndDate")})
   List<StudentsCourses> searchStudentsCourses();
 }
