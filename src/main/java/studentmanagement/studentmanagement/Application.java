@@ -6,25 +6,26 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import studentmanagement.studentmanagement.service.StudentService;
 
 @SpringBootApplication
 @RestController
 public class Application {
 
   @Autowired
-  private StudentRepository repository;
+  private StudentService studentService;
 
   public static void main(String[] args) {
     SpringApplication.run(Application.class, args);
   }
 
-  @GetMapping("/studentList")
-  public List<Student> getStudentList() {
-    return repository.search();
+  @GetMapping("/studentAgeList")
+  public List<Student> getStudentAgeList() {
+    return studentService.searchStudentAgeList();
   }
 
-  @GetMapping("/studentsCourseList")
-  public List<StudentsCourses> getStudentsCoursesList() {
-    return repository.searchStudentsCourses();
+  @GetMapping("/studentsKirieCourses")
+  public List<StudentsCourses> searchStudentsKirieCourses() {
+    return studentService.searchStudentsKirieCourses();
   }
 }
