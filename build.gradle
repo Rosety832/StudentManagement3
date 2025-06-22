@@ -25,9 +25,11 @@ repositories {
 }
 
 dependencies {
+    //Spring Boot
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    // Thymeleaf
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     //My SQLドライバ 便利機能、ユーティリティ
-
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 
