@@ -1,4 +1,4 @@
-package studentmanagement.studentmanagement;
+package studentmanagement.studentmanagement.repository;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Result;
@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
+import studentmanagement.studentmanagement.data.Student;
+import studentmanagement.studentmanagement.data.StudentsCourses;
 
 @Mapper
 public interface StudentRepository {
