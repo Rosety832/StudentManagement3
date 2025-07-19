@@ -39,8 +39,10 @@ public class StudentController {
   }
 
   @GetMapping("/studentsCoursesList")
-  public List<StudentsCourses> getStudentsCoursesList() {
-    return service.searchStudentsCoursesList();
+  public String showStudentsCoursesList(Model model){
+    List<StudentsCourses> courses = service.searchStudentsCoursesList();
+    model.addAttribute("studentsCoursesList",courses);
+    return "studentsCoursesList";
   }
 
   @GetMapping("/newStudent")
@@ -56,6 +58,21 @@ public class StudentController {
     }
     //新規受講生情報を登録する処理を実装する。
     //コース情報も一緒に登録できるように実装する。コースは単体で良い。
+
+    // Student の登録
+    Student student = studentDetail.getStudent();
+    student.setId(service.generateNextStudentId());
+
+    service.insertStudent(student);
+
+    // StudentsCourses の登録（1件）
+    List<StudentsCourses> scList = studentDetail.getStudentsCourses();
+    if (scList != null && !scList.isEmpty()) {
+      StudentsCourses sc = scList.get(0);
+      sc.setMemberId(student.getId());
+      service.insertStudentsCourses(sc);
+    }
+
     return "redirect:/studentList";
   }
 

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th:="http://www.thymeleaf.org">
+<head>
+  <title>受講コース一覧</title>
+</head>
+<body>
+<h1>受講コース一覧</h1>
+<table style="border: 1px solid black; border-collapse: collapse;">
+  <thead>
+  <tr>
+    <th>受講生ID</th>
+    <th>コース名</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="course : ${studentsCoursesList}">
+    <td th:text="${course.memberId}">sampleId</td>
+    <td th:text="${course.course}">sampleCourse</td>
+  </tr>
+  </tbody>
+</table>
+<body>
+<html>
