@@ -30,5 +30,19 @@ public class StudentService {
   public List<StudentsCourses> searchStudentsCoursesList(){
     return repository.searchStudentsCourses();
   }
+
+  public void insertStudent(Student student) {
+    repository.insertStudent(student);
+  }
+
+  public String generateNextStudentId() {
+    Integer maxId = repository.getMaxStudentId();
+    int nextId = (maxId == null) ? 1 : maxId + 1;
+    return String.format("%03d",nextId);
+  }
+
+  public void insertStudentsCourses(StudentsCourses studentsCourses) {
+    repository.insertStudentsCourses(studentsCourses);
+  }
 }
 
