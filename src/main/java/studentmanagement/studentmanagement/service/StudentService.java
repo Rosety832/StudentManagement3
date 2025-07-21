@@ -5,9 +5,11 @@ import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import studentmanagement.studentmanagement.data.Student;
 import studentmanagement.studentmanagement.data.StudentsCourses;
+import studentmanagement.studentmanagement.domain.StudentDetail;
 import studentmanagement.studentmanagement.repository.StudentRepository;
 
 @Slf4j
@@ -31,8 +33,10 @@ public class StudentService {
     return repository.searchStudentsCourses();
   }
 
-  public void insertStudent(Student student) {
-    repository.insertStudent(student);
+  @Transactional
+  public void registerStudent(StudentDetail studentDetail) {
+    repository.registerStudent(studentDetail.getStudent());
+    //TODO:コース情報登録も行う。
   }
 
   public String generateNextStudentId() {

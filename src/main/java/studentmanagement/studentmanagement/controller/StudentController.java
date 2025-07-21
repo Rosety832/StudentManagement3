@@ -63,7 +63,7 @@ public class StudentController {
     Student student = studentDetail.getStudent();
     student.setId(service.generateNextStudentId());
 
-    service.insertStudent(student);
+    service.registerStudent(studentDetail);
 
     // StudentsCourses の登録（1件）
     List<StudentsCourses> scList = studentDetail.getStudentsCourses();
