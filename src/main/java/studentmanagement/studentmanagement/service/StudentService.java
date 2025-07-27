@@ -1,5 +1,6 @@
 package studentmanagement.studentmanagement.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
@@ -36,7 +37,12 @@ public class StudentService {
   @Transactional
   public void registerStudent(StudentDetail studentDetail) {
     repository.registerStudent(studentDetail.getStudent());
-    //TODO:コース情報登録も行う。
+    for(StudentsCourses studentsCourse : studentDetail.getStudentsCourses()) {
+      studentsCourse.setMemberId(studentDetail.getStudent().getId());
+      studentsCourse.setCourseStartDate(LocalDateTime.now());
+      studentsCourse.setCourseEndDate(LocalDateTime.now().plusYears(1));
+      repository.registerStudentsCourses(studentsCourse);
+    }
   }
 
   public String generateNextStudentId() {
@@ -45,8 +51,8 @@ public class StudentService {
     return String.format("%03d",nextId);
   }
 
-  public void insertStudentsCourses(StudentsCourses studentsCourses) {
-    repository.insertStudentsCourses(studentsCourses);
+  public void registerStudentsCourses(StudentsCourses studentsCourses){
+      repository.registerStudentsCourses(studentsCourses);
   }
 }
 

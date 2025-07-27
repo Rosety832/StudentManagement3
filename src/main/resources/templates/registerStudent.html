@@ -39,9 +39,9 @@
     <input type="text" id="remark" th:field="*{student.remark}" />
   </div>
 
-  <div>
-    <label for="course">コース名:</label>
-    <input type="text" th:field="*{studentsCourses[0].course}" />
+  <div th:each="course, stat : *{studentsCourses}">
+    <label for="course" th:for="studentcourse.__${stat.index}__.course">コース名:</label>
+    <input type="text" id="course" th:id="studentsCourse.__${stat.index}__.course"  th:field="*{studentsCourses[__${stat.index}__].course}" />
   </div>
   <div>
     <button type="submit">登録</button>

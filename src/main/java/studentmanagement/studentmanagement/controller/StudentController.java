@@ -1,6 +1,7 @@
 package studentmanagement.studentmanagement.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +48,9 @@ public class StudentController {
 
   @GetMapping("/newStudent")
   public String newStudent(Model model){
-    model.addAttribute("studentDetail",new StudentDetail());
+    StudentDetail studentDetail = new StudentDetail();
+    studentDetail.setStudentsCourses(Arrays.asList(new StudentsCourses()));
+    model.addAttribute("studentDetail", studentDetail);
     return "registerStudent";
   }
 
@@ -70,7 +73,7 @@ public class StudentController {
     if (scList != null && !scList.isEmpty()) {
       StudentsCourses sc = scList.get(0);
       sc.setMemberId(student.getId());
-      service.insertStudentsCourses(sc);
+      service.registerStudentsCourses(sc);
     }
 
     return "redirect:/studentList";
