@@ -37,4 +37,14 @@ public interface StudentRepository {
       "VALUES (#{memberId}, #{course}, #{courseStartDate}, #{courseEndDate})")
   @Options(useGeneratedKeys = true, keyProperty = "id" )
   void registerStudentsCourses(StudentsCourses studentsCourses);
+
+  void updateStudent(Student student);
+  void updateStudentsCourses(StudentsCourses studentsCourse);
+
+  @Select("SELECT * FROM students WHERE id = #{id}")
+  Student findById(String id);
+
+  @Select("SELECT * FROM students_Courses WHERE memberId = #{studentId}")
+  List<StudentsCourses> findCoursesByStudentId(String studentId);
+
 }

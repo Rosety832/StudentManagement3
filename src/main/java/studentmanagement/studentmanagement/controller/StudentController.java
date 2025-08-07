@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
     //import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import studentmanagement.studentmanagement.controller.converter.StudentConverter;
 import studentmanagement.studentmanagement.data.Student;
@@ -79,4 +80,24 @@ public class StudentController {
     return "redirect:/studentList";
   }
 
+  @Autowired
+  private StudentService studentService;
+
+  @GetMapping("/updateStudent/{id}")
+  public String showUpdateStudent(@PathVariable String id, Model model) {
+    StudentDetail studentDetail = studentService.findStudentDetailById(id);
+
+    if(studentDetail == null) {
+      return "redirect:/studentList";
+    }
+
+    model.addAttribute("studentDetail", studentDetail);
+    return "updateStudent";
+  }
+
+  @PostMapping("/updateStudent")
+  public String updateStudent(@ModelAttribute StudentDetail studentDetail){
+      studentService.updateStudentDetail(studentDetail);
+      return "redirect:/studentList";
+  }
 }
